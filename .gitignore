@@ -1,0 +1,13 @@
+﻿_pycache_/
+*.pyc
+.env
+*.log
+output/
+input/
+model/*.pkl
+.idea/
+.vscode/
+dist/
+build/
+.eggs/
+*.egg-info/

@@ -1,0 +1,3 @@
+﻿PyMuPDF==1.24.4
+orjson==3.10.3
+# Add scikit-learn later (Step 5/6) to keep image smaller during early iteration
