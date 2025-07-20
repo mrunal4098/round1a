@@ -80,7 +80,7 @@ def compute_features(lines: List[Line], page_count: int) -> List[Dict[str, Any]]
     for f in features:
         candidate = (
             (
-                f["rel_font_size"] >= 1.12
+                f["rel_font_size"] >= 1.08
                 or (f["is_bold"] and f["word_count"] <= 12 and not f["ends_with_period"])
                 or f["starts_numbering"]
             )
@@ -90,7 +90,8 @@ def compute_features(lines: List[Line], page_count: int) -> List[Dict[str, Any]]
         # exclusion filters
         txt_lower = f["text"].lower()
         if candidate:
-            if f["repeat_count"] >= ((page_count + 1) // 2):
+            if f["repeat_count"] >= 2 and (f["repeat_count"] / page_count) >= 0.5:
+            # Exclude only if appears on >=50% of pages AND at least twice (true running header/footer)
                 candidate = False
             elif f["word_count"] > 20:
                 candidate = False
