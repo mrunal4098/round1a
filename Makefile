@@ -32,3 +32,10 @@ validate:
 	    -v "$(PWD)/output:/app/output" \
 	    --network none --entrypoint python $(IMAGE) -m app.validate_output /app/output/$$(basename $$f) || exit 1; \
 	done
+
+eval:
+	MSYS_NO_PATHCONV=1 docker run --rm \
+		-v "$(PWD)/ground_truth:/app/ground_truth" \
+		-v "$(PWD)/output:/app/output" \
+		--network none --entrypoint python $(IMAGE) -m app.eval /app/ground_truth /app/output
+
