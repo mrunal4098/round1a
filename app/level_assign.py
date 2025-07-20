@@ -99,3 +99,14 @@ def assign_levels(candidates: List[Dict[str,Any]], page_count: int):
     for c in candidates:
         ordered.append(c)
     return ordered, title_candidate
+
+def dedupe_outline(entries):
+    seen = set()
+    out = []
+    for e in entries:
+        key = (e["level"], e["text"], e["page"])
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(e)
+    return out

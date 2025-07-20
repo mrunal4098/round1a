@@ -25,4 +25,11 @@ class Config:
     FOOTER_MAX_FONT_REL = 0.9
 
     # Debug
-    INCLUDE_DEBUG = True
+
+# Runtime flag (default off) – set DEBUG=1 environment variable to include debug keys.
+import os
+Config.INCLUDE_DEBUG = (os.getenv("DEBUG") == "1")
+
+# Runtime flag (default off) – set DEBUG=1 environment variable to include debug keys.
+import os
+Config.INCLUDE_DEBUG = (os.getenv("DEBUG") == "1")
