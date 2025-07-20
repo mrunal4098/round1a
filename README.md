@@ -12,3 +12,9 @@ Run (empty processing):
 
 ## Next Steps
 Add parsing & line assembly logic (Step 2).
+
+## Final Usage (Submission Mode)
+
+Place PDFs (≤50 pages each) into input/ then run:
+'''bash
+make run
