@@ -1,12 +1,12 @@
 IMAGE=pdf1a:dev
-PROJECT_ROOT:=$(shell pwd)
+PROJECT_ROOT := $(PWD)
 
 build:
 	docker build --platform=linux/amd64 -t $(IMAGE) .
 
 run:
 	mkdir -p input output
-	docker run --rm -v "$(PROJECT_ROOT)/input:/app/input" -v "$(PROJECT_ROOT)/output:/app/output" --network none $(IMAGE)
+	MSYS_NO_PATHCONV=1 docker run --rm -v "$(PROJECT_ROOT)/input:/app/input" -v "$(PROJECT_ROOT)/output:/app/output" --network none $(IMAGE)
 
 shell:
-	docker run --rm -it -v "$(PROJECT_ROOT)/input:/app/input" -v "$(PROJECT_ROOT)/output:/app/output" --network none $(IMAGE) /bin/bash
+	MSYS_NO_PATHCONV=1 docker run --rm -it -v "$(PROJECT_ROOT)/input:/app/input" -v "$(PROJECT_ROOT)/output:/app/output" --network none $(IMAGE) /bin/bash
