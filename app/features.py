@@ -85,6 +85,11 @@ def compute_features(lines: List[Line], page_count: int) -> List[Dict[str, Any]]
 
         ratios     = script_ratios(raw)
         dom_script = dominant_script(ratios)       
+    # ── rescue: treat unknown lines that contain normal Arabic letters as Arabic ──
+
+    if dom_script == "unknown" and re.search(r'[\u0600-\u06FF]', raw):
+
+        dom_script = "arabic"
     # ── rescue: if ratios missed normal Arabic letters ──
 
     if dom_script == "unknown" and re.search(r'[\u0600-\u06FF]', raw):
