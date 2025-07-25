@@ -1,4 +1,5 @@
-import json, time, pathlib, sys, os
+# app/main.py
+import json, time, pathlib, sys
 from .pdf_loader import load_document
 from .layout import build_lines
 from .features import compute_features
@@ -16,7 +17,6 @@ def process_pdf(pdf_path: pathlib.Path):
     lines = build_lines(doc_ctx)
     feats = compute_features(lines, doc_ctx.page_count)
 
-    # Collect candidates
     candidates = []
     for f in feats:
         if f["candidate_heading"]:
@@ -28,10 +28,11 @@ def process_pdf(pdf_path: pathlib.Path):
                 "is_bold": f["is_bold"],
                 "starts_numbering": f["starts_numbering"],
                 "gap_above": f["gap_above"],
+                "y0": f.get("y0", 0.0),
                 "score": score_candidate(f)
             })
 
-    candidates.sort(key=lambda c: (c["page"], -c["score"]))
+    candidates.sort(key=lambda c: (c["page"], c.get("y0", 0.0)))
 
     outline_entries = []
     title_text = pdf_path.stem
@@ -55,7 +56,6 @@ def process_pdf(pdf_path: pathlib.Path):
     base_json = build_final_json(title_text, outline_entries)
 
     if Config.INCLUDE_DEBUG:
-        # Light debug views
         base_json["_debug_candidates"] = [
             {"page": c["page"], "text": c["text"][:120], "score": c["score"]}
             for c in candidates
@@ -71,9 +71,13 @@ def process_pdf(pdf_path: pathlib.Path):
 
 def main():
     t0 = time.time()
-    pdfs = sorted([p for p in INPUT_DIR.iterdir() if p.is_file() and p.suffix.lower()==".pdf"])
+    arg_pdfs = [pathlib.Path(a) for a in sys.argv[1:] if a.lower().endswith(".pdf")]
+    if arg_pdfs:
+        pdfs = arg_pdfs
+    else:
+        pdfs = sorted([p for p in INPUT_DIR.iterdir() if p.is_file() and p.suffix.lower()==".pdf"])
     if not pdfs:
-        print("[INFO] No PDFs found in /app/input.", file=sys.stderr)
+        print("[INFO] No PDFs found.", file=sys.stderr)
     for p in pdfs:
         print(f"[INFO] Processing {p.name}", file=sys.stderr)
         process_pdf(p)

@@ -1,0 +1,9 @@
+{
+  "title": "Technical Specification",
+  "outline": [
+    { "level": "H1", "text": "I INTRODUCTION", "page": 1 },
+    { "level": "H1", "text": "II METHODS", "page": 1 },
+    { "level": "H1", "text": "III RESULTS", "page": 2 },
+    { "level": "H1", "text": "Appendix A Additional Tables", "page": 2 }
+  ]
+}

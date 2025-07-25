@@ -1,0 +1,63 @@
+MSYS_NO_PATHCONV=1 docker run --rm \
+		-v "C:/Users/Munnu/pdf-outline-1A/ground_truth:/app/ground_truth" \
+		-v "C:/Users/Munnu/pdf-outline-1A/output:/app/output" \
+		--network none --entrypoint python pdf1a:dev -m app.eval /app/ground_truth /app/output
+
+FILE: A
+  STRICT : P=0.8571 R=1.0 F1=0.9231 (TP=6 FP=1 FN=0)
+  LENIENT: P=0.8571 R=1.0 F1=0.9231 (TP=6 FP=1 FN=0)
+  Level breakdown (strict):
+    H1: P=0.75 R=1.0 F1=0.8571 (TP=3 FP=1 FN=0)
+    H2: P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+
+FILE: B
+  STRICT : P=1.0 R=1.0 F1=1.0 (TP=5 FP=0 FN=0)
+  LENIENT: P=1.0 R=1.0 F1=1.0 (TP=5 FP=0 FN=0)
+  Level breakdown (strict):
+    H1: P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+    H2: P=1.0 R=1.0 F1=1.0 (TP=2 FP=0 FN=0)
+
+FILE: C
+  STRICT : P=1.0 R=1.0 F1=1.0 (TP=4 FP=0 FN=0)
+  LENIENT: P=1.0 R=1.0 F1=1.0 (TP=4 FP=0 FN=0)
+  Level breakdown (strict):
+    H1: P=1.0 R=1.0 F1=1.0 (TP=4 FP=0 FN=0)
+
+FILE: D
+  STRICT : P=1.0 R=1.0 F1=1.0 (TP=4 FP=0 FN=0)
+  LENIENT: P=1.0 R=1.0 F1=1.0 (TP=4 FP=0 FN=0)
+  Level breakdown (strict):
+    H1: P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+    H2: P=1.0 R=1.0 F1=1.0 (TP=1 FP=0 FN=0)
+
+FILE: E_real
+  STRICT : P=1.0 R=0.6667 F1=0.8 (TP=2 FP=0 FN=1)
+  LENIENT: P=1.0 R=0.6667 F1=0.8 (TP=2 FP=0 FN=1)
+  Level breakdown (strict):
+    H1: P=1.0 R=1.0 F1=1.0 (TP=2 FP=0 FN=0)
+    H2: P=1.0 R=0.0 F1=0.0 (TP=0 FP=0 FN=1)
+
+FILE: F_ar
+  STRICT : P=1.0 R=0.0 F1=0.0 (TP=0 FP=0 FN=3)
+  LENIENT: P=1.0 R=0.0 F1=0.0 (TP=0 FP=0 FN=3)
+  Level breakdown (strict):
+    H1: P=1.0 R=0.0 F1=0.0 (TP=0 FP=0 FN=2)
+    H2: P=1.0 R=0.0 F1=0.0 (TP=0 FP=0 FN=1)
+
+FILE: G_hi
+  STRICT : P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+  LENIENT: P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+  Level breakdown (strict):
+    H1: P=1.0 R=1.0 F1=1.0 (TP=2 FP=0 FN=0)
+    H2: P=1.0 R=1.0 F1=1.0 (TP=1 FP=0 FN=0)
+
+FILE: sample
+  STRICT : P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+  LENIENT: P=1.0 R=1.0 F1=1.0 (TP=3 FP=0 FN=0)
+  Level breakdown (strict):
+    H1: P=1.0 R=1.0 F1=1.0 (TP=2 FP=0 FN=0)
+    H2: P=1.0 R=1.0 F1=1.0 (TP=1 FP=0 FN=0)
+
+AGGREGATE STRICT: P=0.9643 R=0.8710 F1=0.9153 (TP=27 FP=1 FN=4)
+
+AGGREGATE LENIENT: P=0.9643 R=0.8710 F1=0.9153 (TP=27 FP=1 FN=4)

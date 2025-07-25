@@ -1,0 +1,11 @@
+{
+  "title": "Academic Paper Title",
+  "outline": [
+    { "level": "H1", "text": "1 Introduction", "page": 1 },
+    { "level": "H2", "text": "1.1 Background", "page": 1 },
+    { "level": "H1", "text": "2 Methods", "page": 2 },
+    { "level": "H2", "text": "2.1 Data", "page": 2 },
+    { "level": "H2", "text": "2.2 Training", "page": 2 },
+    { "level": "H1", "text": "3 Conclusion", "page": 3 }
+  ]
+}

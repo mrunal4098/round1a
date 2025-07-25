@@ -1,0 +1,8 @@
+{
+  "title": "機械学習入門",
+  "outline": [
+    { "level": "H1", "text": "第1章 緒論", "page": 1 },
+    { "level": "H2", "text": "1.1 背景", "page": 1 },
+    { "level": "H1", "text": "第2章 手法", "page": 2 }
+  ]
+}

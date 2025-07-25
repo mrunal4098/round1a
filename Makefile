@@ -6,10 +6,17 @@ build:
 
 run:
 	mkdir -p input output
-	MSYS_NO_PATHCONV=1 docker run --rm -v "$(PROJECT_ROOT)/input:/app/input" -v "$(PROJECT_ROOT)/output:/app/output" --network none $(IMAGE)
+	MSYS_NO_PATHCONV=1 docker run --rm \
+		-e DEBUG=$(DEBUG) \
+		-v "$(PROJECT_ROOT)/input:/app/input" \
+		-v "$(PROJECT_ROOT)/output:/app/output" \
+		--network none $(IMAGE)
 
 shell:
-	MSYS_NO_PATHCONV=1 docker run --rm -it -v "$(PROJECT_ROOT)/input:/app/input" -v "$(PROJECT_ROOT)/output:/app/output" --network none $(IMAGE) /bin/bash
+	MSYS_NO_PATHCONV=1 docker run --rm -it \
+		-v "$(PROJECT_ROOT)/input:/app/input" \
+		-v "$(PROJECT_ROOT)/output:/app/output" \
+		--network none $(IMAGE) /bin/bash
 
 perf:
 	MSYS_NO_PATHCONV=1 docker run --rm \
@@ -17,11 +24,12 @@ perf:
 		-v "$(PWD)/output:/app/output" \
 		--network none --entrypoint python $(IMAGE) -m app.perf
 
-
 run_debug:
-	MSYS_NO_PATHCONV=1 DEBUG=1 docker run --rm \
-		-v "$(PWD)/input:/app/input" \
-		-v "$(PWD)/output:/app/output" \
+	mkdir -p input output
+	MSYS_NO_PATHCONV=1 docker run --rm \
+		-e DEBUG=1 \
+		-v "$(PROJECT_ROOT)/input:/app/input" \
+		-v "$(PROJECT_ROOT)/output:/app/output" \
 		--network none $(IMAGE)
 
 validate:
@@ -38,4 +46,3 @@ eval:
 		-v "$(PWD)/ground_truth:/app/ground_truth" \
 		-v "$(PWD)/output:/app/output" \
 		--network none --entrypoint python $(IMAGE) -m app.eval /app/ground_truth /app/output
-
