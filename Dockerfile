@@ -1,4 +1,4 @@
-﻿FROM --platform=linux/amd64 python:3.11-slim
+﻿FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -6,14 +6,16 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# System deps (none yet; add tesseract later)
+# System deps
 RUN apt-get update && apt-get install -y --no-install-recommends fonts-noto-cjk \
     && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /app/input /app/output
 
 COPY assets/fonts /app/fonts
 COPY requirements.txt .
 RUN pip install --disable-pip-version-check -r requirements.txt
 
-COPY app ./app
-
+COPY app/ ./app
+RUN mkdir -p /app/input /app/output
 ENTRYPOINT ["python","-m","app.main"]
